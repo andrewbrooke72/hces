@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePositionsTable extends Migration
+class CreateEmployeeBenefitsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreatePositionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('positions', function (Blueprint $table) {
+        Schema::create('employee_benefits', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('rank');
-            $table->string('name');
-            $table->text('description');
-            $table->string('employment_status');
-            $table->float('rate');
-            $table->enum('rate_type', ['HOURLY', 'DAILY']);
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('benefits_id');
+            $table->string('value');
             $table->timestamps();
             $table->softDeletes();
+            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('benefits_id')->references('id')->on('benefits');
         });
     }
 
@@ -33,6 +32,6 @@ class CreatePositionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('positions');
+        Schema::dropIfExists('employee_benefits');
     }
 }

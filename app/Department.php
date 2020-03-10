@@ -5,16 +5,14 @@ namespace HCES;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Position extends Model
+class Department extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'rank',
+        'id',
         'name',
         'description',
-        'employment_status',
-        'rate',
-        'rate_type',
     ];
+
 }

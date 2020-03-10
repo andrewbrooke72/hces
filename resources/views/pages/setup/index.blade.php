@@ -7,7 +7,7 @@
                 <div class="card-group">
                     <div class="card p-4">
                         <div class="card-body">
-                            @if(\App\SystemSetting::first()->finished_setup == 0)
+                            @if(\HCES\SystemSetting::first()->finished_setup == 0)
                                 <form action="{{ route('postSystemInstall') }}" method="POST">
                                     {{ csrf_field() }}
                                     <div class="row">

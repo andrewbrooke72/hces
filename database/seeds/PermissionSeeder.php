@@ -18,12 +18,12 @@ class PermissionSeeder extends Seeder
                 ['name' => 'employee.view', 'description' => 'view employee records'],
                 ['name' => 'employee.edit', 'description' => 'edit employee records'],
             ];
-            $current_permissions = \App\Permission::all();
+            $current_permissions = \HCES\Permission::all();
             foreach ($permissions as $permission) {
                 if ($current_permissions->where('name', $permission['name'])->first() != null) {
                     continue;
                 }
-                $permission = new \App\Permission($permission);
+                $permission = new \HCES\Permission($permission);
                 $permission->save();
             }
         } catch (Exception $exception) {
