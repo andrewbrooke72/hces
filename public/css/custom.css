@@ -1,0 +1,29 @@
+.bg-arsenal-blue {
+    background: #4386fa;
+}
+
+.btn-arsenal-blue {
+    background: #4386fa;
+    color: white;
+}
+
+.text-arsenal-blue {
+    color: #4386fa;
+}
+
+.bg-arsenal-blue-dark {
+    background: #3b7bea;
+}
+
+.btn-arsenal-blue-dark {
+    background: #3b7bea;
+    color: white;
+}
+
+.text-arsenal-blue-dark {
+    color: #3b7bea;
+}
+
+.maprow:hover {
+    background-color: #4386fa;
+}
