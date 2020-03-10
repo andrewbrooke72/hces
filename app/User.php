@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace HCES;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -38,7 +38,7 @@ class User extends Authenticatable
 
     public function permissions()
     {
-        return $this->belongsToMany('App\Permission', 'user_permissions', 'user_id', 'permission_id');
+        return $this->belongsToMany('HCES\Permission', 'user_permissions', 'user_id', 'permission_id');
     }
 
     public function hasAnyPermission($required_permissions)
@@ -72,6 +72,6 @@ class User extends Authenticatable
 
     public function notifications()
     {
-        return $this->hasMany('App\Notification');
+        return $this->hasMany('HCES\Notification');
     }
 }

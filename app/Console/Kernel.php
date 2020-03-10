@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console;
+namespace HCES\Console;
 
-use App\Console\Commands\SystemSetup;
+use HCES\Console\Commands\SystemSetup;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 

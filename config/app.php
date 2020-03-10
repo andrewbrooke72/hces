@@ -167,11 +167,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        HCES\Providers\AppServiceProvider::class,
+        HCES\Providers\AuthServiceProvider::class,
+        HCES\Providers\BroadcastServiceProvider::class,
+        HCES\Providers\EventServiceProvider::class,
+        HCES\Providers\RouteServiceProvider::class,
         \Snowfire\Beautymail\BeautymailServiceProvider::class,
         \Weidner\Goutte\GoutteServiceProvider::class,
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class

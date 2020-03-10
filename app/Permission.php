@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace HCES;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class Permission extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_permissions', 'permission_id', 'user_id');
+        return $this->belongsToMany('HCES\User', 'user_permissions', 'permission_id', 'user_id');
     }
 }

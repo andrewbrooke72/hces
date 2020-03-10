@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace HCES\Console\Commands;
 
-use App\SystemSetting;
+use HCES\SystemSetting;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;

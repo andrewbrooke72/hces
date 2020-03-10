@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Events;
+namespace HCES\Events;
 
-use App\Notification;
+use HCES\Notification;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Queue\SerializesModels;

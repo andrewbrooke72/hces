@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace HCES\Http\Middleware;
 
-use App\SystemSetting;
+use HCES\SystemSetting;
 use Closure;
 
 class SystemInfoMiddleware

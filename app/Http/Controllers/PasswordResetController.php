@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace HCES\Http\Controllers;
 
-use App\PasswordReset;
-use App\User;
+use HCES\PasswordReset;
+use HCES\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

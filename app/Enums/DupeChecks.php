@@ -6,7 +6,7 @@
  * Time: 6:21 PM
  */
 
-namespace App\Enums;
+namespace HCES\Enums;
 
 
 abstract class DupeChecks

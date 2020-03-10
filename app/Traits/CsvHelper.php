@@ -7,7 +7,7 @@
  * Time=> 5=>54 PM
  */
 
-namespace App\Traits;
+namespace HCES\Traits;
 
 trait CsvHelper
 {

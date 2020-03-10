@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace HCES\Http\Controllers;
 
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Http\Request;

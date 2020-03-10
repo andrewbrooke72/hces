@@ -6,10 +6,10 @@
  * Date=> 2018-11-22
  * Time=> 5=>54 PM
  */
-namespace App\Traits;
+namespace HCES\Traits;
 
-use App\DiallerConnection;
-use App\DiallerTable;
+use HCES\DiallerConnection;
+use HCES\DiallerTable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
 

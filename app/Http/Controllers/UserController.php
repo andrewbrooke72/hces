@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace HCES\Http\Controllers;
 
-use App\Permission;
-use App\User;
+use HCES\Permission;
+use HCES\User;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

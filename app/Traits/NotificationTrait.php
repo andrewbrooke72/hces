@@ -6,10 +6,10 @@
  * Date=> 2018-11-22
  * Time=> 5=>54 PM
  */
-namespace App\Traits;
+namespace HCES\Traits;
 
-use App\Events\Notify;
-use App\Notification;
+use HCES\Events\Notify;
+use HCES\Notification;
 use Illuminate\Support\Facades\Auth;
 
 trait NotificationTrait

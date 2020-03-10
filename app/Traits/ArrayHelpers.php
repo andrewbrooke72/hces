@@ -6,7 +6,7 @@
  * Date=> 2018-11-22
  * Time=> 5=>54 PM
  */
-namespace App\Traits;
+namespace HCES\Traits;
 
 trait ArrayHelpers
 {

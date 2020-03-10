@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace HCES\Http\Controllers;
 
-use App\DataList;
-use App\DynamicDataList;
-use App\Traits\DupeCheckTrait;
-use App\Traits\PAFCheckerTrait;
+use HCES\DataList;
+use HCES\DynamicDataList;
+use HCES\Traits\DupeCheckTrait;
+use HCES\Traits\PAFCheckerTrait;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

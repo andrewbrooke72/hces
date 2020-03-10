@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace HCES\Http\Controllers;
 
 class WelcomeController extends Controller
 {

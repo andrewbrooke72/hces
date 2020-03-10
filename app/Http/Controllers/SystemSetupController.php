@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace HCES\Http\Controllers;
 
-use App\Permission;
-use App\SystemSetting;
-use App\User;
+use HCES\Permission;
+use HCES\SystemSetting;
+use HCES\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
