@@ -34,6 +34,9 @@ Route::group(['prefix' => '/'], function () {
     Route::resource('benefits', 'BenefitsController')->except([
         'show'
     ]);
+    Route::resource('departments', 'DepartmentsController')->except([
+        'show'
+    ]);
 
     Route::group(['prefix' => 'settings/'], function () {
         Route::group(['prefix' => 'system/'], function () {

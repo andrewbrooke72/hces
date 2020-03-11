@@ -21,6 +21,10 @@
                                     <a class="nav-link" href="{{ route('benefits.index') }}"><i
                                             class="icon-support"></i> Benefits</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('departments.index') }}"><i
+                                            class="icon-flag"></i> Departments</a>
+                                </li>
                             </ul>
                         </li>
                     @endif
