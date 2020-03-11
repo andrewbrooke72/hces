@@ -6,13 +6,13 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-align-justify"></i> Edit User
-                            <a href="{{ route('user.index') }}"
+                            <i class="fa fa-align-justify"></i> @include('snippets.pagename')
+                            <a href="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.index') }}"
                                class="btn btn-primary float-right text-light">Browse</a>
                         </div>
                         <div class="card-body">
                             @include('snippets.dialogs')
-                            <form id="main-form" action="{{ route('user.update', ['id' => $user->id]) }}" method="POST">
+                            <form id="main-form" action="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.update', ['id' => $user->id]) }}" method="POST">
                                 {{ method_field('PUT') }}
                                 {{ csrf_field() }}
                                 <div class="row">

@@ -2,30 +2,27 @@
 
 namespace HCES\Http\Controllers;
 
-use HCES\Permission;
-use HCES\User;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use HCES\Benefits;
+use HCES\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class BenefitsController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permissions:user.management');
+        $this->middleware('permissions:sysvar.management');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $users = User::paginate(10);
-        return view('pages.user.index')->with('users', $users);
+        $benefits = Benefits::paginate(100);
+        return view('pages.benefits.index')->with([
+            'benefits' => $benefits
+        ]);
     }
 
     /**
@@ -35,8 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all();
-        return view('pages.user.create')->with('permissions', $permissions);
+        return view('pages.benefits.create');
     }
 
     /**
@@ -50,27 +46,19 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
-                'email' => 'required',
-                'password' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'permissions' => 'required',
+                'name' => 'required',
             ]);
-
             if ($validator->fails()) {
-                return redirect(route('users.create'))
+                return redirect(route('benefits.create'))
                     ->withErrors($validator)
                     ->withInput();
             }
-
             $data = $request->all();
-            $user = new User($data);
-            $user->save();
-            $permissions = Permission::whereIn('id', $data['permissions'])->get();
-            $user->permissions()->attach($permissions);
+            $benefit = new Benefits($data);
+            $benefit->save();
             DB::commit();
-            return redirect(route('users.index'))
-                ->with('status_success', 'User created!');
+            return redirect(route('benefits.index'))
+                ->with('status_success', 'Benefit created!');
         } catch (\Exception $exception) {
             Bugsnag::notifyException($exception);
             DB::rollBack();
@@ -97,9 +85,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::with('permissions')->where('id', $id)->first();
-        $permissions = Permission::all();
-        return view('pages.user.edit')->with(['user' => $user, 'permissions' => $permissions]);
+        $benefit = Benefits::find($id);
+        return view('pages.benefits.edit')->with('benefit', $benefit);
     }
 
     /**
@@ -114,34 +101,24 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
-                'email' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'permissions' => 'required',
+                'name' => 'required',
             ]);
-
             if ($validator->fails()) {
                 return back()
                     ->withErrors($validator)
                     ->withInput();
             }
-
             $data = $request->all();
-            if (is_null($data['password'])) {
-                unset($data['password']);
-            }
-            $user = User::find($id);
-            $user->fill($data);
-            $user->save();
-            $user->permissions()->detach();
-            $user->permissions()->attach(Permission::whereIn('id', $data['permissions'])->get());
+            $benefit = Benefits::find($id);
+            $benefit->fill($data);
+            $benefit->save();
             DB::commit();
-            return redirect(route('users.index'))
-                ->with('status_success', 'User updated!');
+            return redirect(route('benefits.index'))
+                ->with('status_success', 'Benefit updated!');
         } catch (\Exception $exception) {
             Bugsnag::notifyException($exception);
             DB::rollBack();
-            return back()->with('status_error', 'Creation failed: ' . $exception->getMessage());
+            return back()->with('status_error', 'Update failed: ' . $exception->getMessage());
         }
     }
 
@@ -155,16 +132,15 @@ class UserController extends Controller
     {
         DB::beginTransaction();
         try {
-            $user = User::find($id);
-            $user->delete();
+            $benefit = Benefits::find($id);
+            $benefit->delete();
             DB::commit();
-            return redirect(route('users.index'))
-                ->with('status_success', 'User deleted!');
+            return redirect(route('benefits.index'))
+                ->with('status_success', 'Benefit deleted!');
         } catch (\Exception $exception) {
             Bugsnag::notifyException($exception);
             DB::rollBack();
             return back()->with('status_error', 'Delete failed: ' . $exception->getMessage());
         }
-
     }
 }

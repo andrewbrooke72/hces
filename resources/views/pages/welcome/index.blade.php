@@ -37,8 +37,7 @@
                         <div class="card-body text-center">
                             <div>
                                 <h2 align="left">{{ env('APP_NAME') }}</h2>
-                                <p align="left">To provide automation on data management for higher quality, competent and grade A+ data for centers.
-                                    {{ env('APP_NAME') }} will provide efficient and accurate automation on data cleaning, recycling, storage and third party dialler integrations.</p>
+                                <p align="left">Not your casual HR system</p>
                             </div>
                         </div>
                     </div>

@@ -26,9 +26,15 @@ Route::group(['prefix' => '/'], function () {
     Route::resource('reset', 'PasswordResetController')->only([
         'index', 'store', 'show', 'reset'
     ])->middleware('guest');
-    Route::resource('user', 'UserController')->except([
+
+    Route::resource('users', 'UserController')->except([
         'show'
     ]);
+
+    Route::resource('benefits', 'BenefitsController')->except([
+        'show'
+    ]);
+
     Route::group(['prefix' => 'settings/'], function () {
         Route::group(['prefix' => 'system/'], function () {
             Route::name('systemsetting.index')->get('', 'SystemSettingController@index');

@@ -5,16 +5,28 @@
                 <a class="nav-link" href="/"><i class="icon-speedometer"></i> Home</a>
             </li>
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-user"></i> Users</a>
+                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> System Admin</a>
                 <ul class="nav-dropdown-items">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.index') }}"><i class="icon-list"></i> Browse</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.create') }}"><i class="icon-plus"></i> Create</a>
-                    </li>
+                    @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('user.management'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('users.index') }}"><i class="icon-user"></i> Users</a>
+                        </li>
+                    @endif
+                    @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('sysvar.management'))
+                        <li class="nav-item nav-dropdown">
+                            <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> System
+                                Variables</a>
+                            <ul class="nav-dropdown-items">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('benefits.index') }}"><i
+                                            class="icon-support"></i> Benefits</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </li>
+
 
         </ul>
     </nav>

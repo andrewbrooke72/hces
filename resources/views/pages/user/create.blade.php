@@ -6,13 +6,15 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <i class="fa fa-align-justify"></i> Create User
-                            <a href="{{ route('user.index') }}"
+                            <i class="fa fa-align-justify"></i> @include('snippets.pagename')
+                            <a href="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.index') }}"
                                class="btn btn-primary float-right text-light">Browse</a>
                         </div>
                         <div class="card-body">
                             @include('snippets.dialogs')
-                            <form id="main-form" action="{{ route('user.store') }}" method="POST">
+                            <form id="main-form"
+                                  action="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.store') }}"
+                                  method="POST">
                                 {{ csrf_field() }}
                                 <div class="row">
                                     <div class="col-lg-12 col-md-12 col-sm-12">
@@ -44,7 +46,8 @@
                                     @foreach($permissions as $index => $permission)
                                         <div class="col-sm-3 col-md-3 col-lg-3">
                                             <div class="form-check">
-                                                <input name = "permissions[]" type="checkbox" value="{{ $permission->id }}"
+                                                <input name="permissions[]" type="checkbox"
+                                                       value="{{ $permission->id }}"
                                                        class="form-check-input" id="{{ $index }}">
                                                 <label class="form-check-label"
                                                        for="{{ $index }}">{{ ucwords(str_replace('.', ' ', $permission->name)) }}</label>
