@@ -17,4 +17,9 @@ class Position extends Model
         'rate',
         'rate_type',
     ];
+
+    public function employees()
+    {
+        return $this->hasMany('HCES\Employee');
+    }
 }

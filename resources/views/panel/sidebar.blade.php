@@ -29,6 +29,10 @@
                                     <a class="nav-link" href="{{ route('shifts.index') }}"><i
                                             class="icon-clock"></i> Shifts</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('positions.index') }}"><i
+                                            class="icon-layers"></i> Positions</a>
+                                </li>
                             </ul>
                         </li>
                     @endif

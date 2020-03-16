@@ -43,6 +43,10 @@ Route::group(['prefix' => '/'], function () {
         'show'
     ]);
 
+    Route::resource('positions', 'PositionController')->except([
+        'show'
+    ]);
+
     Route::group(['prefix' => 'settings/'], function () {
         Route::group(['prefix' => 'system/'], function () {
             Route::name('systemsetting.index')->get('', 'SystemSettingController@index');
