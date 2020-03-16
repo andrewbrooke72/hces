@@ -174,7 +174,8 @@ return [
         HCES\Providers\RouteServiceProvider::class,
         \Snowfire\Beautymail\BeautymailServiceProvider::class,
         \Weidner\Goutte\GoutteServiceProvider::class,
-        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        \Intervention\Image\ImageServiceProvider::class
     ],
 
     /*
@@ -223,8 +224,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Goutte' => \Weidner\Goutte\GoutteFacade::class
-
+        'Goutte' => \Weidner\Goutte\GoutteFacade::class,
+        'Image' => \Intervention\Image\Facades\Image::class
     ],
 
 ];
