@@ -18,9 +18,9 @@ class CreateEmployeesTable extends Migration
             $table->string('photo')->nullable();
             $table->boolean('is_active')->default(true);
             $table->string('employee_id');
-            $table->unsignedBigInteger('shift_id');
-            $table->unsignedBigInteger('department_id');
-            $table->unsignedBigInteger('position_id');
+            $table->unsignedBigInteger('shift_id')->nullable();
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('position_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('middle_name');

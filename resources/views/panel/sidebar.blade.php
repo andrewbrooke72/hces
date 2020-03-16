@@ -14,7 +14,7 @@
                     @endif
                     @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('sysvar.management'))
                         <li class="nav-item nav-dropdown">
-                            <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> System
+                            <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-key"></i> System
                                 Variables</a>
                             <ul class="nav-dropdown-items">
                                 <li class="nav-item">
@@ -24,6 +24,10 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('departments.index') }}"><i
                                             class="icon-flag"></i> Departments</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('shifts.index') }}"><i
+                                            class="icon-clock"></i> Shifts</a>
                                 </li>
                             </ul>
                         </li>

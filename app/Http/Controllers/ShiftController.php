@@ -2,19 +2,20 @@
 
 namespace HCES\Http\Controllers;
 
-use HCES\Permission;
-use HCES\User;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use HCES\Employee;
+use HCES\Shift;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class ShiftController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permissions:user.management');
+        $this->middleware('permissions:sysvar.management');
     }
 
     /**
@@ -24,8 +25,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(10);
-        return view('pages.user.index')->with('users', $users);
+        $shifts = Shift::paginate(100);
+        return view('pages.shifts.index')->with('shifts', $shifts);
     }
 
     /**
@@ -35,8 +36,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $permissions = Permission::all();
-        return view('pages.user.create')->with('permissions', $permissions);
+        return view('pages.shifts.create');
     }
 
     /**
@@ -50,27 +50,22 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
-                'email' => 'required',
-                'password' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'permissions' => 'required',
+                'name' => 'required',
+                'from' => 'required',
+                'to' => 'required'
             ]);
 
             if ($validator->fails()) {
-                return redirect(route('users.create'))
+                return redirect(route('shifts.create'))
                     ->withErrors($validator)
                     ->withInput();
             }
-
             $data = $request->all();
-            $user = new User($data);
-            $user->save();
-            $permissions = Permission::whereIn('id', $data['permissions'])->get();
-            $user->permissions()->attach($permissions);
+            $shift = new Shift($data);
+            $shift->save();
             DB::commit();
-            return redirect(route('users.index'))
-                ->with('status_success', 'User created!');
+            return redirect(route('shifts.index'))
+                ->with('status_success', 'Shift created!');
         } catch (\Exception $exception) {
             Bugsnag::notifyException($exception);
             DB::rollBack();
@@ -97,9 +92,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::with('permissions')->where('id', $id)->first();
-        $permissions = Permission::all();
-        return view('pages.user.edit')->with(['user' => $user, 'permissions' => $permissions]);
+        $shift = Shift::find($id);
+        return view('pages.shifts.edit')->with('shift', $shift);
     }
 
     /**
@@ -114,10 +108,9 @@ class UserController extends Controller
         DB::beginTransaction();
         try {
             $validator = Validator::make($request->all(), [
-                'email' => 'required',
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'permissions' => 'required',
+                'name' => 'required',
+                'from' => 'required',
+                'to' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -127,17 +120,12 @@ class UserController extends Controller
             }
 
             $data = $request->all();
-            if (is_null($data['password'])) {
-                unset($data['password']);
-            }
-            $user = User::find($id);
-            $user->fill($data);
-            $user->save();
-            $user->permissions()->detach();
-            $user->permissions()->attach(Permission::whereIn('id', $data['permissions'])->get());
+            $shift = Shift::find($id);
+            $shift->fill($data);
+            $shift->save();
             DB::commit();
-            return redirect(route('users.index'))
-                ->with('status_success', 'User updated!');
+            return redirect(route('shifts.index'))
+                ->with('status_success', 'Shift updated!');
         } catch (\Exception $exception) {
             Bugsnag::notifyException($exception);
             DB::rollBack();
@@ -155,16 +143,19 @@ class UserController extends Controller
     {
         DB::beginTransaction();
         try {
-            $user = User::find($id);
-            $user->delete();
+            $shift = Shift::with('employees')->find($id);
+            foreach ($shift->employees as $employee) {
+                $employee->shift_id = null;
+                $employee->save();
+            }
+            $shift->delete();
             DB::commit();
-            return redirect(route('users.index'))
-                ->with('status_success', 'User deleted!');
+            return redirect(route('shifts.index'))
+                ->with('status_success', 'Shift deleted!');
         } catch (\Exception $exception) {
             Bugsnag::notifyException($exception);
             DB::rollBack();
             return back()->with('status_error', 'Delete failed: ' . $exception->getMessage());
         }
-
     }
 }

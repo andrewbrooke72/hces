@@ -14,4 +14,9 @@ class Shift extends Model
         'from',
         'to',
     ];
+
+    public function employees()
+    {
+        return $this->hasMany('HCES\Employee');
+    }
 }
