@@ -13,6 +13,7 @@ class Employee extends Model
         'photo',
         'is_active',
         'employee_id',
+        'shift_id',
         'department_id',
         'position_id',
         'first_name',
@@ -28,4 +29,24 @@ class Employee extends Model
         'contact_number',
         'other_contact_number',
     ];
+
+    public function position()
+    {
+        return $this->belongsTo('HCES\Position');
+    }
+
+    public function benefits()
+    {
+        return $this->hasMany('HCES\Benefits');
+    }
+
+    public function shift()
+    {
+        return $this->belongsTo('HCES\Shift');
+    }
+
+    public function department()
+    {
+        return $this->belongsTo('HCES\Department');
+    }
 }

@@ -40,7 +40,7 @@
                                         </td>
                                         <td>
                                             <form
-                                                onsubmit="return confirm('Do you really want to delete this variable? It will detach any employee on this shift.');"
+                                                onsubmit="return confirm('Do you really want to delete this variable? It will detach any employees on this shift.');"
                                                 action="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.destroy', ['id' => $shift->id]) }}"
                                                 method="post">
                                                 {{ csrf_field()  }}

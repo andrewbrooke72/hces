@@ -55,19 +55,9 @@ return [
             'visibility' => 'public',
         ],
 
-        'lists' => [
+        'employee_photos' => [
             'driver' => 'local',
-            'root' => public_path() . '/lists',
-        ],
-
-        'data_list_exports' => [
-            'driver' => 'local',
-            'root' => public_path() . '/data_list_exports',
-        ],
-
-        'scrape' => [
-            'driver' => 'local',
-            'root' => public_path() . '/scrape',
+            'root' => storage_path() . '/app/employee_photos',
         ],
 
         's3' => [

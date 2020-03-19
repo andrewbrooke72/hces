@@ -15,45 +15,40 @@
                             <table class="table table-responsive-sm">
                                 <thead>
                                 <tr>
-                                    <th>Rank</th>
-                                    <th>Name</th>
-                                    <th>Description</th>
-                                    <th>Employment Status</th>
-                                    <th>Rate</th>
-                                    <th>Rate type</th>
+                                    <th></th>
+                                    <th>Fullname</th>
+                                    <th>Shift</th>
+                                    <th>Department</th>
+                                    <th>Position</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($positions as $position)
+                                @foreach($employees as $employee)
                                     <tr>
                                         <td>
-                                            {{ $position->rank }}
+                                            <label class="switch switch-text switch-pill switch-success switch-sm">
+                                                <input type="checkbox" class="switch-input" {{ $employee->is_active ? 'checked' : '' }}>
+                                                <span class="switch-label" data-on="ACT" data-off="IACT"></span>
+                                                <span class="switch-handle"></span>
+                                            </label>
                                         </td>
                                         <td>
-                                            {{ ucwords($position->name) }}
+                                            <img style="width: 65px; height: 65px;" src = "{{ route('image.load', ['disk' => encrypt('employee_photos'), !is_null($employee->photo) ? encrypt($employee->photo) : encrypt('null.png')]) }}"/>
+                                            {{ $employee->first_name }} {{ $employee->last_name }}
                                         </td>
+                                        <td>{{ $employee->shift->name }} ({{ date("g:i a", strtotime($employee->shift->from)) }}) ({{ date("g:i a", strtotime($employee->shift->to)) }})</td>
+                                        <td>{{ $employee->department->name }}</td>
+                                        <td>{{ strtoupper($employee->position->name) }} ({{ $employee->position->employment_status }})</td>
                                         <td>
-                                            {{ $position->description }}
-                                        </td>
-                                        <td>
-                                            {{ $position->employment_status }}
-                                        </td>
-                                        <td>
-                                            {{ $position->rate }}
-                                        </td>
-                                        <td>
-                                            {{ $position->rate_type }}
-                                        </td>
-                                        <td>
-                                            <a href="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.edit', ['id' => $position->id]) }}"
+                                            <a href="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.edit', ['id' => $employee->id]) }}"
                                                class="btn btn-primary">Edit</a>
                                         </td>
                                         <td>
                                             <form
-                                                onsubmit="return confirm('Do you really want to delete this variable? It will detach any employees on this position.');"
-                                                action="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.destroy', ['id' => $position->id]) }}"
+                                                onsubmit="return confirm('Do you really want to delete this variable?');"
+                                                action="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.destroy', ['id' => $employee->id]) }}"
                                                 method="post">
                                                 {{ csrf_field()  }}
                                                 {{ method_field('DELETE') }}
@@ -64,7 +59,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            {{ $positions->links() }}
+                            {{ $employees->links() }}
                         </div>
                     </div>
                 </div>

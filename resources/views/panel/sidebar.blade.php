@@ -5,7 +5,17 @@
                 <a class="nav-link" href="/"><i class="icon-speedometer"></i> Home</a>
             </li>
             <li class="nav-item nav-dropdown">
-                <a class="nav-link nav-dropdown-toggle" href="#"><i class="icon-settings"></i> System Admin</a>
+                <a class="nav-link nav-dropdown-toggle" href="#hr"><i class="icon-heart"></i> Human Resource</a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('employees.index') }}"><i
+                                class="icon-people"></i> Employees</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link nav-dropdown-toggle" href="#sysvar"><i class="icon-settings"></i> System Admin</a>
                 <ul class="nav-dropdown-items">
                     @if(\Illuminate\Support\Facades\Auth::user()->hasPermission('user.management'))
                         <li class="nav-item">

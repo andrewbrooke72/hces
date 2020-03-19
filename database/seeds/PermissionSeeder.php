@@ -14,9 +14,7 @@ class PermissionSeeder extends Seeder
         try {
             $permissions = [
                 ['name' => 'user.management', 'description' => 'manage system users'],
-                ['name' => 'employee.create', 'description' => 'create employee records'],
-                ['name' => 'employee.view', 'description' => 'view employee records'],
-                ['name' => 'employee.edit', 'description' => 'edit employee records'],
+                ['name' => 'employees.management', 'description' => 'manage employees'],
                 ['name' => 'sysvar.management', 'description' => 'system variable management'],
             ];
             $current_permissions = \HCES\Permission::all();

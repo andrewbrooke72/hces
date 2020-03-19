@@ -30,26 +30,34 @@ Route::group(['prefix' => '/'], function () {
     Route::resource('users', 'UserController')->except([
         'show'
     ]);
-
-    Route::resource('benefits', 'BenefitsController')->except([
-        'show'
-    ]);
-
-    Route::resource('departments', 'DepartmentsController')->except([
-        'show'
-    ]);
-
-    Route::resource('shifts', 'ShiftController')->except([
-        'show'
-    ]);
-
-    Route::resource('positions', 'PositionController')->except([
-        'show'
-    ]);
+    Route::group(['prefix' => 'hr/'], function () {
+        Route::resource('employees', 'EmployeeController')->except([
+            'show'
+        ]);
+    });
+    Route::group(['prefix' => 'sysvar/'], function () {
+        Route::resource('benefits', 'BenefitsController')->except([
+            'show'
+        ]);
+        Route::resource('departments', 'DepartmentsController')->except([
+            'show'
+        ]);
+        Route::resource('shifts', 'ShiftController')->except([
+            'show'
+        ]);
+        Route::resource('positions', 'PositionController')->except([
+            'show'
+        ]);
+    });
 
     Route::group(['prefix' => 'settings/'], function () {
         Route::group(['prefix' => 'system/'], function () {
             Route::name('systemsetting.index')->get('', 'SystemSettingController@index');
+        });
+    });
+    Route::group(['prefix' => 'scrty/'], function () {
+        Route::group(['prefix' => 'i/'], function () {
+            Route::name('image.load')->get('l/{disk}/{filename}', 'ImageController@load');
         });
     });
     Route::group(['prefix' => 'playground/'], function () {

@@ -28,8 +28,8 @@ class CreateEmployeesTable extends Migration
             $table->date('date_of_birth');
             $table->integer('age');
             $table->string('permanent_address');
-            $table->integer('length_of_service_years')->default(0);
-            $table->integer('length_of_service_years_months')->default(0);
+            $table->integer('length_of_service_years')->nullable()->default(0);
+            $table->integer('length_of_service_years_months')->nullable()->default(0);
             $table->string('length_of_service')->nullable();
             $table->string('contact_number')->nullable();
             $table->string('other_contact_number')->nullable();
