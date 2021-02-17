@@ -42,6 +42,20 @@
                                     </div>
                                 </div>
                                 <br>
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="input-group">
+                                            <select class = "form-control" name="employee_id">
+                                                <option value = "" selected disabled>Attach employee data</option>
+                                                @foreach($employees as $employee)
+                                                    <option
+                                                        value="{{ $employee->id }}">{{ $employee->first_name }} {{ $employee->last_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="row" style="padding: 24px">
                                     @foreach($permissions as $index => $permission)
                                         <div class="col-sm-3 col-md-3 col-lg-3">

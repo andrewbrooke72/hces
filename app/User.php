@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'photo', 'first_name', 'last_name', 'email', 'password',
+        'photo', 'first_name', 'employee_id', 'last_name', 'email', 'password',
     ];
 
     /**
@@ -34,6 +34,11 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo('HCES\Employee');
     }
 
     public function permissions()

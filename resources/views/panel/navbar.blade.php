@@ -20,19 +20,14 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="{{ is_null(auth()->user()->photo) ? 'https://www.gravatar.com/avatar/'.md5(strtolower(trim(auth()->user()->email))).'?s=160&d=retro' : auth()->user()->photo}}"
+                <img src="{{ is_null(auth()->user()->employee()->first()) ? 'https://www.gravatar.com/avatar/'.md5(strtolower(trim(auth()->user()->email))).'?s=160&d=retro' : asset('storage/employee_photos/' . auth()->user()->employee()->first()->photo)}}"
                      class="img-avatar" alt="{{ Auth::user()->email }}">
             </a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-header text-center">
                     <strong>{{ auth()->user()->first_name }}'s Account</strong>
                 </div>
-                <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-                <div class="dropdown-header text-center">
-                    <strong>Settings</strong>
-                </div>
                 <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
-                <a class="dropdown-item" href="{{ route('systemsetting.index') }}"><i class="fa fa-wrench"></i> System Settings</a>
                 <div class="divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();

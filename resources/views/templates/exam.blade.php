@@ -34,17 +34,9 @@
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 <input type="hidden" id="uid" value="{{ auth()->user()->id }}">
-@include('panel.navbar')
 <div class="app-body" id="app-fe">
-    @include('panel.sidebar')
-    <main class="main">
-        @include('panel.breadcrumb')
         @yield('content')
-    </main>
-    @include('panel.asidemenu')
 </div>
-@include('panel.footer')
-@include('panel.scripts')
 <!-- Bootstrap and necessary plugins -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 

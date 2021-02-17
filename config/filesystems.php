@@ -57,7 +57,7 @@ return [
 
         'employee_photos' => [
             'driver' => 'local',
-            'root' => storage_path() . '/app/employee_photos',
+            'root' => storage_path() . '/app/public/employee_photos',
         ],
 
         's3' => [

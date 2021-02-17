@@ -2,6 +2,7 @@
 
 namespace HCES\Http\Controllers;
 
+use HCES\Employee;
 use HCES\Permission;
 use HCES\User;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
@@ -25,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-        return view('pages.user.index')->with('users', $users);
+        return view('pages.user.index')->with(['users' => $users]);
     }
 
     /**
@@ -36,7 +37,9 @@ class UserController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        return view('pages.user.create')->with('permissions', $permissions);
+        $attached_employees = User::whereNotNull('employee_id')->get()->pluck('employee_id')->all();
+        $employees = Employee::whereNotIn('id', $attached_employees)->get();
+        return view('pages.user.create')->with(['permissions' => $permissions, 'employees' => $employees]);
     }
 
     /**

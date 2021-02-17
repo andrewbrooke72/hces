@@ -16,6 +16,8 @@ class PermissionSeeder extends Seeder
                 ['name' => 'user.management', 'description' => 'manage system users'],
                 ['name' => 'employees.management', 'description' => 'manage employees'],
                 ['name' => 'sysvar.management', 'description' => 'system variable management'],
+                ['name' => 'agent.*', 'description' => 'Agent permission'],
+                ['name' => 'testpaper.management', 'description' => 'manage test papers'],
             ];
             $current_permissions = \HCES\Permission::all();
             foreach ($permissions as $permission) {
