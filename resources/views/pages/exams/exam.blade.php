@@ -32,7 +32,7 @@
                                         @if($question->type == 'multiple')
                                             @foreach($question->choices as $choice)
                                                 <div class="form-check">
-                                                    <input class="form-check-input browsers" type="checkbox"
+                                                    <input class="form-check-input" type="checkbox"
                                                            name="{{ $question->id . '_answers[]' }}"
                                                            id="{{ $question->id . '_answers' }}"
                                                            value="{{ $choice->id }}">
@@ -57,5 +57,10 @@
     </div>
 @endsection
 @section('additionalJS')
-
+    <script>
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            window.history.pushState(null, "", window.location.href);
+        };
+    </script>
 @endsection

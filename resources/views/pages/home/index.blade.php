@@ -9,7 +9,8 @@
                             <div class="card-body">
                                 <center><h3 class="text-muted">HELLO! {{ auth()->user()->first_name }} let's be
                                         productive today.</h3></center>
-                                @if(auth()->user()->hasPermission('agent.*'))
+                                @include('snippets.dialogs')
+                                @if(auth()->user()->hasPermission('agent.*') && auth()->user()->exam_passed == 0)
                                     <a href="{{ route('exams.index') }}" class = "btn btn-block btn-arsenal-blue">Click here to take your exam.</a>
                                 @endif
 
