@@ -13,7 +13,7 @@
                         <div class="card-body">
                             @include('snippets.dialogs')
                             <form id="main-form"
-                                  action="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.update') }}"
+                                  action="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.update', ['id' => $employee->id]) }}"
                                   method="POST" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}
