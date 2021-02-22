@@ -30,6 +30,7 @@
                                         <td>
                                             <form id="{{ $employee->id . '-activation' }}" method="POST"
                                                   action="{{ route('employees.toggleActive', ['id' => $employee->id]) }}">
+                                                {{ csrf_field() }}
                                                 <label class="switch switch-text switch-pill switch-success switch-sm">
                                                     <input type="checkbox"
                                                            class="switch-input" onchange="$('{{ '#'.$employee->id . '-activation' }}').submit();" {{ $employee->is_active ? 'checked' : '' }}>
