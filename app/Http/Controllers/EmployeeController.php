@@ -112,13 +112,19 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
+        $shifts = Shift::all();
+        $departments = Department::all();
+        $positions = Position::all();
         $employee = Employee::with([
             'position',
             'shift',
             'department'
         ])->find($id);
         return view('pages.employees.edit')->with([
-            'employee' => $employee
+            'employee' => $employee,
+            'shifts' => $shifts,
+            'departments' => $departments,
+            'positions' => $positions
         ]);
     }
 
