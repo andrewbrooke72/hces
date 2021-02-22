@@ -28,19 +28,29 @@
                                 @foreach($employees as $employee)
                                     <tr>
                                         <td>
-                                            <label class="switch switch-text switch-pill switch-success switch-sm">
-                                                <input type="checkbox" class="switch-input" {{ $employee->is_active ? 'checked' : '' }}>
-                                                <span class="switch-label" data-on="ACT" data-off="IACT"></span>
-                                                <span class="switch-handle"></span>
-                                            </label>
+                                            <form id="{{ $employee->id . '-activation' }}" method="POST"
+                                                  action="{{ route('employees.toggleActive', ['id' => $employee->id]) }}">
+                                                <label class="switch switch-text switch-pill switch-success switch-sm">
+                                                    <input type="checkbox"
+                                                           class="switch-input" onchange="$('{{ '#'.$employee->id . '-activation' }}').submit();" {{ $employee->is_active ? 'checked' : '' }}>
+                                                    <span class="switch-label" data-on="ACT" data-off="IACT"></span>
+                                                    <span class="switch-handle"></span>
+                                                </label>
+                                            </form>
                                         </td>
                                         <td>
-                                            <img style="width: 65px; height: 65px;" src = "{{ route('image.load', ['disk' => encrypt('employee_photos'), !is_null($employee->photo) ? encrypt($employee->photo) : encrypt('null.png')]) }}"/>
+                                            <img style="width: 65px; height: 65px;"
+                                                 src="{{ route('image.load', ['disk' => encrypt('employee_photos'), !is_null($employee->photo) ? encrypt($employee->photo) : encrypt('null.png')]) }}"/>
                                             {{ $employee->first_name }} {{ $employee->last_name }}
                                         </td>
-                                        <td>{{ $employee->shift->name }} ({{ date("g:i a", strtotime($employee->shift->from)) }}) ({{ date("g:i a", strtotime($employee->shift->to)) }})</td>
+                                        <td>{{ $employee->shift->name }}
+                                            ({{ date("g:i a", strtotime($employee->shift->from)) }})
+                                            ({{ date("g:i a", strtotime($employee->shift->to)) }})
+                                        </td>
                                         <td>{{ $employee->department->name }}</td>
-                                        <td>{{ strtoupper($employee->position->name) }} ({{ $employee->position->employment_status }})</td>
+                                        <td>{{ strtoupper($employee->position->name) }}
+                                            ({{ $employee->position->employment_status }})
+                                        </td>
                                         <td>
                                             <a href="{{ route(explode('.', \Illuminate\Support\Facades\Route::currentRouteName())[0].'.edit', ['id' => $employee->id]) }}"
                                                class="btn btn-primary">Edit</a>

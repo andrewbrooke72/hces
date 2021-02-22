@@ -20,7 +20,7 @@
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                <img src="{{ is_null(auth()->user()->employee()->first()) ? 'https://www.gravatar.com/avatar/'.md5(strtolower(trim(auth()->user()->email))).'?s=160&d=retro' : asset('storage/employee_photos/' . auth()->user()->employee()->first()->photo)}}"
+                <img src="{{ is_null(auth()->user()->employee()->first()) ? 'https://www.gravatar.com/avatar/'.md5(strtolower(trim(auth()->user()->email))).'?s=160&d=retro' : asset('/employee_photos/' . auth()->user()->employee()->first()->photo)}}"
                      class="img-avatar" alt="{{ Auth::user()->email }}">
             </a>
             <div class="dropdown-menu dropdown-menu-right">

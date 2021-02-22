@@ -112,7 +112,14 @@ class EmployeeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $employee = Employee::with([
+            'position',
+            'shift',
+            'department'
+        ])->find($id);
+        return view('pages.employees.edit')->with([
+            'employee' => $employee
+        ]);
     }
 
     /**
@@ -124,7 +131,19 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $data = $request->all();
+            $employee = Employee::find($id);
+            $employee->fill($data);
+            $employee->save();
+            DB::commit();
+            return back()->with('status_success', 'Employee updated!');
+        } catch (\Exception $exception) {
+            Bugsnag::notifyException($exception);
+            DB::rollBack();
+            return back()->with('status_error', 'Update failed: ' . $exception->getMessage());
+        }
     }
 
     /**
@@ -136,5 +155,20 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function toggleActive($id){
+        DB::beginTransaction();
+        try {
+            $employee = Employee::find($id);
+            $employee->is_active = $employee->is_active ? 0 : 1;
+            $employee->save();
+            DB::commit();
+            return back()->with('status_success', 'Employee toggled.');
+        } catch (\Exception $exception) {
+            Bugsnag::notifyException($exception);
+            DB::rollBack();
+            return back()->with('status_error', 'Update failed: ' . $exception->getMessage());
+        }
     }
 }

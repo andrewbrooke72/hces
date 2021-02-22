@@ -36,6 +36,7 @@ Route::group(['prefix' => '/'], function () {
         'show'
     ]);
     Route::group(['prefix' => 'hr/'], function () {
+        Route::name('employees.toggleActive')->post('/{id}', 'EmployeeController@toggleActive');
         Route::resource('employees', 'EmployeeController')->except([
             'show'
         ]);
